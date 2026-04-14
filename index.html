@@ -14,12 +14,10 @@
     --surface: #141414;
     --border: #2a2a2a;
     --accent: #c8ff00;
-    --accent2: #ff4d4d;
     --text: #f0f0f0;
     --muted: #666;
     --good: #c8ff00;
     --warn: #ffaa00;
-    --bad: #ff4d4d;
   }
 
   body {
@@ -27,15 +25,15 @@
     color: var(--text);
     font-family: 'DM Mono', monospace;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     overflow-x: hidden;
   }
 
-  header {
-    width: 100%;
-    padding: 20px 32px;
+  .page { display: none; min-height: 100vh; flex-direction: column; }
+  .page.active { display: flex; }
+
+  /* ── LANDING ── */
+  .landing-header {
+    padding: 24px 40px;
     display: flex;
     align-items: baseline;
     gap: 16px;
@@ -56,13 +54,166 @@
     text-transform: uppercase;
   }
 
-  .main {
-    width: 100%;
-    max-width: 960px;
-    padding: 24px 16px;
+  .landing-hero {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: center;
+    padding: 60px 24px 48px;
+    text-align: center;
+    gap: 24px;
+  }
+
+  .hero-tag {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 0.5px solid var(--accent);
+    padding: 4px 14px;
+    border-radius: 2px;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 12vw, 108px);
+    line-height: 0.92;
+    letter-spacing: 0.03em;
+  }
+
+  .hero-title span { color: var(--accent); }
+
+  .hero-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 2;
+    max-width: 460px;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    width: 100%;
+    max-width: 680px;
+  }
+
+  .feature-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 4px;
+    padding: 20px 16px;
+    text-align: left;
+  }
+
+  .feature-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .feature-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .feature-desc {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .how-section {
+    width: 100%;
+    max-width: 680px;
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+    text-align: left;
+  }
+
+  .how-title {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .how-step {
+    display: flex;
+    gap: 14px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .how-step:last-child { margin-bottom: 0; }
+
+  .how-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 16px;
+  }
+
+  .btn-start {
+    width: 100%;
+    max-width: 680px;
+    padding: 20px;
+    background: var(--accent);
+    border: none;
+    border-radius: 4px;
+    color: #000;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+
+  .btn-start:hover { background: #d8ff20; transform: scale(1.01); }
+  .btn-start:active { transform: scale(0.99); }
+
+  /* ── CAMERA PAGE ── */
+  .cam-header {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .back-btn {
+    background: transparent;
+    border: 0.5px solid var(--border);
+    border-radius: 4px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .back-btn:hover { border-color: var(--text); color: var(--text); }
+
+  .cam-main {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 
   .camera-section {
@@ -76,27 +227,22 @@
   }
 
   #videoEl {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
     object-fit: cover;
     transform: scaleX(-1);
     opacity: 0;
   }
 
   #canvasEl {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
     transform: scaleX(-1);
   }
 
   .overlay-status {
     position: absolute;
-    top: 16px;
-    left: 50%;
+    top: 16px; left: 50%;
     transform: translateX(-50%);
     background: rgba(0,0,0,0.75);
     backdrop-filter: blur(6px);
@@ -112,13 +258,10 @@
 
   .overlay-status.good { color: var(--good); border-color: var(--good); }
   .overlay-status.warn { color: var(--warn); border-color: var(--warn); }
-  .overlay-status.bad  { color: var(--bad);  border-color: var(--bad);  }
 
   .feedback-bar {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: 0; left: 0; right: 0;
     padding: 14px 20px;
     background: linear-gradient(transparent, rgba(0,0,0,0.85));
     display: flex;
@@ -133,20 +276,10 @@
     transition: color 0.2s;
   }
 
-  .angle-display {
-    font-size: 12px;
-    color: var(--muted);
-    text-align: right;
-    line-height: 1.6;
-  }
-
+  .angle-display { font-size: 12px; color: var(--muted); text-align: right; line-height: 1.6; }
   .angle-display span { color: var(--text); }
 
-  .stats-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
+  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 
   .stat-card {
     background: var(--surface);
@@ -158,44 +291,26 @@
     gap: 6px;
   }
 
-  .stat-label {
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
+  .stat-label { font-size: 10px; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
 
   .stat-value {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 48px;
-    line-height: 1;
+    font-size: 48px; line-height: 1;
     color: var(--accent);
     transition: color 0.3s;
   }
 
-  .stat-value.flash {
-    animation: flash 0.3s ease;
-  }
+  .stat-value.flash { animation: flash 0.3s ease; }
 
   @keyframes flash {
     0%   { color: #fff; transform: scale(1.1); }
     100% { color: var(--accent); transform: scale(1); }
   }
 
-  .stat-sub {
-    font-size: 10px;
-    color: var(--muted);
-  }
-
-  .controls {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
+  .stat-sub { font-size: 10px; color: var(--muted); }
 
   .btn {
     flex: 1;
-    min-width: 140px;
     padding: 14px 20px;
     background: transparent;
     border: 0.5px solid var(--border);
@@ -211,38 +326,8 @@
 
   .btn:hover { border-color: var(--text); color: var(--text); }
 
-  .btn.primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #000;
-    font-weight: 500;
-  }
-
-  .btn.primary:hover { background: #d8ff20; }
-
-  .btn.danger {
-    border-color: var(--bad);
-    color: var(--bad);
-  }
-
-  .btn.danger:hover { background: rgba(255,77,77,0.1); }
-
-  .guide {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: 4px;
-    padding: 16px 20px;
-    font-size: 11px;
-    color: var(--muted);
-    line-height: 2;
-    letter-spacing: 0.04em;
-  }
-
-  .guide strong { color: var(--accent); font-weight: 400; }
-
   .loading-overlay {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background: var(--surface);
     display: flex;
     flex-direction: column;
@@ -252,15 +337,10 @@
     z-index: 10;
   }
 
-  .loading-text {
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-  }
+  .loading-text { font-size: 12px; color: var(--muted); letter-spacing: 0.1em; }
 
   .spinner {
-    width: 32px;
-    height: 32px;
+    width: 32px; height: 32px;
     border: 1.5px solid var(--border);
     border-top-color: var(--accent);
     border-radius: 50%;
@@ -270,126 +350,166 @@
   @keyframes spin { to { transform: rotate(360deg); } }
 
   .side-indicator {
-    position: absolute;
-    top: 16px;
-    right: 16px;
+    position: absolute; top: 16px; right: 16px;
     background: rgba(0,0,0,0.75);
     border: 0.5px solid var(--border);
     border-radius: 2px;
     padding: 6px 14px;
-    font-size: 11px;
-    letter-spacing: 0.1em;
+    font-size: 11px; letter-spacing: 0.1em;
     color: var(--muted);
   }
 
   .depth-bar-wrap {
-    position: absolute;
-    left: 16px;
-    top: 50%;
+    position: absolute; left: 16px; top: 50%;
     transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 6px;
   }
 
   .depth-bar-track {
-    width: 6px;
-    height: 140px;
+    width: 6px; height: 140px;
     background: var(--border);
-    border-radius: 3px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+    border-radius: 3px; overflow: hidden;
+    display: flex; flex-direction: column;
     justify-content: flex-end;
   }
 
   .depth-bar-fill {
-    width: 100%;
-    background: var(--accent);
-    transition: height 0.1s;
-    border-radius: 3px;
+    width: 100%; background: var(--accent);
+    transition: height 0.1s; border-radius: 3px;
   }
 
   .depth-bar-label {
-    font-size: 9px;
-    color: var(--muted);
+    font-size: 9px; color: var(--muted);
     letter-spacing: 0.08em;
     writing-mode: vertical-lr;
     transform: rotate(180deg);
+  }
+
+  @media (max-width: 600px) {
+    .feature-grid { grid-template-columns: 1fr; }
+    .landing-hero { padding: 40px 20px 40px; }
+    .hero-title { font-size: 60px; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">Lunge Rep Checker</div>
-  <div class="subtitle">Knee-to-floor detection · Browser only</div>
-</header>
+<!-- ══ LANDING PAGE ══ -->
+<div class="page active" id="landingPage">
+  <header class="landing-header">
+    <div class="logo">Lunge Rep Checker</div>
+    <div class="subtitle">AI · Browser Only · No Install</div>
+  </header>
 
-<div class="main">
+  <div class="landing-hero">
+    <div class="hero-tag">AI 자세 분석</div>
 
-  <div class="camera-section" id="cameraSection">
-    <video id="videoEl" playsinline></video>
-    <canvas id="canvasEl"></canvas>
+    <div class="hero-title">LUNGE<br><span>DEPTH</span><br>CHECKER</div>
 
-    <div class="loading-overlay" id="loadingOverlay">
-      <div class="spinner"></div>
-      <div class="loading-text">AI 모델 로딩 중...</div>
-    </div>
+    <p class="hero-desc">
+      카메라 하나로 런지 깊이를 실시간 분석해요.<br>
+      앱 설치 없이 브라우저에서 바로 사용 가능해요.
+    </p>
 
-    <div class="overlay-status" id="statusLabel">카메라 시작을 눌러주세요</div>
-
-    <div class="side-indicator" id="sideLabel">감지 대기 중</div>
-
-    <div class="depth-bar-wrap">
-      <div class="depth-bar-label">DEPTH</div>
-      <div class="depth-bar-track">
-        <div class="depth-bar-fill" id="depthBar" style="height:0%"></div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-num">01</div>
+        <div class="feature-title">실시간 각도 측정</div>
+        <div class="feature-desc">무릎 각도를 실시간으로 계산해서 충분히 내려갔는지 알려줘요</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">02</div>
+        <div class="feature-title">자동 카운트</div>
+        <div class="feature-desc">무릎이 100° 이하로 내려가면 자동으로 횟수를 세줘요</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">03</div>
+        <div class="feature-title">설치 불필요</div>
+        <div class="feature-desc">앱 없이 브라우저만 있으면 바로 사용할 수 있어요</div>
       </div>
     </div>
 
-    <div class="feedback-bar">
-      <div class="feedback-text" id="feedbackText" style="color:var(--muted)">준비</div>
-      <div class="angle-display">
-        무릎 각도 <span id="kneeAngle">—</span>°<br>
-        목표 <span style="color:var(--accent)">≤ 100°</span>
+    <div class="how-section">
+      <div class="how-title">사용 방법</div>
+      <div class="how-step">
+        <div class="how-num">1</div>
+        <div>카메라 시작 버튼을 누르고 카메라 권한을 허용해주세요</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">2</div>
+        <div>옆모습이 보이도록 카메라 앞에 서주세요 <span style="color:var(--accent)">(측면 90°가 가장 정확해요)</span></div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">3</div>
+        <div>런지를 내려갈 때 앞무릎이 100° 이하가 되면 자동으로 카운트돼요</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">4</div>
+        <div>무릎이 바닥에 닿을수록 각도가 작아져요. 목표는 <span style="color:var(--accent)">90° 이하</span>예요</div>
       </div>
     </div>
+
+    <button class="btn-start" onclick="goToCamera()">카메라 시작하기 →</button>
+  </div>
+</div>
+
+<!-- ══ CAMERA PAGE ══ -->
+<div class="page" id="cameraPage">
+  <div class="cam-header">
+    <div class="logo" style="font-size:22px">Lunge Rep Checker</div>
+    <button class="back-btn" onclick="goToLanding()">← 뒤로</button>
   </div>
 
-  <div class="stats-row">
-    <div class="stat-card">
-      <div class="stat-label">Total Reps</div>
-      <div class="stat-value" id="repCount">0</div>
-      <div class="stat-sub">완료된 런지</div>
+  <div class="cam-main">
+    <div class="camera-section">
+      <video id="videoEl" playsinline></video>
+      <canvas id="canvasEl"></canvas>
+
+      <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <div class="loading-text">AI 모델 로딩 중...</div>
+      </div>
+
+      <div class="overlay-status" id="statusLabel">카메라 시작 중...</div>
+      <div class="side-indicator" id="sideLabel">감지 대기 중</div>
+
+      <div class="depth-bar-wrap">
+        <div class="depth-bar-label">DEPTH</div>
+        <div class="depth-bar-track">
+          <div class="depth-bar-fill" id="depthBar" style="height:0%"></div>
+        </div>
+      </div>
+
+      <div class="feedback-bar">
+        <div class="feedback-text" id="feedbackText" style="color:var(--muted)">준비</div>
+        <div class="angle-display">
+          무릎 각도 <span id="kneeAngle">—</span>°<br>
+          목표 <span style="color:var(--accent)">≤ 100°</span>
+        </div>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="stat-label">Min Angle</div>
-      <div class="stat-value" id="minAngle" style="font-size:36px;padding-top:6px">—</div>
-      <div class="stat-sub">이번 세트 최저 무릎각도</div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Total Reps</div>
+        <div class="stat-value" id="repCount">0</div>
+        <div class="stat-sub">완료된 런지</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Min Angle</div>
+        <div class="stat-value" id="minAngle" style="font-size:36px;padding-top:6px">—</div>
+        <div class="stat-sub">이번 세트 최저 각도</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Status</div>
+        <div class="stat-value" id="phaseLabel" style="font-size:24px;padding-top:10px;color:var(--muted)">IDLE</div>
+        <div class="stat-sub">현재 동작 단계</div>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="stat-label">Status</div>
-      <div class="stat-value" id="phaseLabel" style="font-size:24px;padding-top:10px;color:var(--muted)">IDLE</div>
-      <div class="stat-sub">현재 동작 단계</div>
-    </div>
-  </div>
 
-  <div class="controls">
-    <button class="btn primary" id="startBtn" onclick="startCamera()">카메라 시작</button>
-    <button class="btn" id="resetBtn" onclick="resetStats()">횟수 초기화</button>
+    <button class="btn" onclick="resetStats()">횟수 초기화</button>
   </div>
-
-  <div class="guide">
-    <strong>사용법</strong><br>
-    1. 카메라 시작 버튼을 누르고 카메라 권한을 허용해주세요<br>
-    2. 옆모습이 보이도록 폰/노트북 카메라 앞에 서주세요 (측면 90°)<br>
-    3. 런지를 내려갈 때 앞무릎이 100° 이하가 되면 <strong>자동으로 카운트</strong>됩니다<br>
-    4. 무릎이 바닥에 닿을수록 각도가 작아져요 (목표: 90° 이하)<br><br>
-    <strong>팁</strong> — 카메라 측면에서 찍어야 정확해요. 정면은 인식이 어렵습니다
-  </div>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
@@ -397,24 +517,32 @@
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
 
 <script>
-const videoEl   = document.getElementById('videoEl');
-const canvasEl  = document.getElementById('canvasEl');
-const ctx       = canvasEl.getContext('2d');
-const loadingEl = document.getElementById('loadingOverlay');
-const statusEl  = document.getElementById('statusLabel');
-const sideEl    = document.getElementById('sideLabel');
-const feedbackEl= document.getElementById('feedbackText');
-const kneeAngleEl = document.getElementById('kneeAngle');
-const repCountEl  = document.getElementById('repCount');
-const minAngleEl  = document.getElementById('minAngle');
-const phaseEl     = document.getElementById('phaseLabel');
-const depthBarEl  = document.getElementById('depthBar');
+const videoEl    = document.getElementById('videoEl');
+const canvasEl   = document.getElementById('canvasEl');
+const ctx        = canvasEl.getContext('2d');
+const loadingEl  = document.getElementById('loadingOverlay');
+const statusEl   = document.getElementById('statusLabel');
+const sideEl     = document.getElementById('sideLabel');
+const feedbackEl = document.getElementById('feedbackText');
+const kneeAngleEl= document.getElementById('kneeAngle');
+const repCountEl = document.getElementById('repCount');
+const minAngleEl = document.getElementById('minAngle');
+const phaseEl    = document.getElementById('phaseLabel');
+const depthBarEl = document.getElementById('depthBar');
 
-let repCount = 0;
-let minAngle = Infinity;
-let phase = 'up';   // 'up' | 'down'
-let cameraStarted = false;
-let frameMinAngle = Infinity;
+let repCount = 0, minAngle = Infinity, phase = 'up';
+let cameraStarted = false, frameMinAngle = Infinity;
+
+function goToCamera() {
+  document.getElementById('landingPage').classList.remove('active');
+  document.getElementById('cameraPage').classList.add('active');
+  if (!cameraStarted) startCamera();
+}
+
+function goToLanding() {
+  document.getElementById('cameraPage').classList.remove('active');
+  document.getElementById('landingPage').classList.add('active');
+}
 
 function calcAngle(a, b, c) {
   const ab = { x: a.x - b.x, y: a.y - b.y };
@@ -426,41 +554,25 @@ function calcAngle(a, b, c) {
 }
 
 function flashValue(el) {
-  el.classList.remove('flash');
-  void el.offsetWidth;
-  el.classList.add('flash');
+  el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
 }
 
 function resetStats() {
-  repCount = 0;
-  minAngle = Infinity;
-  phase = 'up';
+  repCount = 0; minAngle = Infinity; phase = 'up';
   repCountEl.textContent = '0';
   minAngleEl.textContent = '—';
   phaseEl.textContent = 'IDLE';
   phaseEl.style.color = 'var(--muted)';
 }
 
-const pose = new Pose({
-  locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`
-});
-
-pose.setOptions({
-  modelComplexity: 1,
-  smoothLandmarks: true,
-  enableSegmentation: false,
-  minDetectionConfidence: 0.5,
-  minTrackingConfidence: 0.5
-});
+const pose = new Pose({ locateFile: (f) => `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${f}` });
+pose.setOptions({ modelComplexity: 1, smoothLandmarks: true, enableSegmentation: false, minDetectionConfidence: 0.5, minTrackingConfidence: 0.5 });
 
 pose.onResults((results) => {
   canvasEl.width  = videoEl.videoWidth  || 640;
   canvasEl.height = videoEl.videoHeight || 480;
-
   ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
-  ctx.save();
-  ctx.scale(-1, 1);
-  ctx.translate(-canvasEl.width, 0);
+  ctx.save(); ctx.scale(-1,1); ctx.translate(-canvasEl.width,0);
   ctx.drawImage(results.image, 0, 0, canvasEl.width, canvasEl.height);
   ctx.restore();
 
@@ -474,126 +586,70 @@ pose.onResults((results) => {
   }
 
   const lm = results.poseLandmarks;
-
-  // Draw skeleton
   drawConnectors(ctx, lm, POSE_CONNECTIONS, { color: '#333', lineWidth: 1 });
   drawLandmarks(ctx, lm, { color: '#c8ff00', lineWidth: 1, radius: 3 });
 
-  // Detect which leg is front (lower knee = front leg)
-  const leftKnee  = lm[25];
-  const rightKnee = lm[26];
-  const leftHip   = lm[23];
-  const rightHip  = lm[24];
-  const leftAnkle = lm[27];
-  const rightAnkle= lm[28];
-
-  // Use the knee with lower y (higher on screen = further back), actually higher y = lower
-  const usLeft = leftKnee.y > rightKnee.y;
-  const hip   = usLeft ? leftHip   : rightHip;
-  const knee  = usLeft ? leftKnee  : rightKnee;
-  const ankle = usLeft ? leftAnkle : rightAnkle;
-  const side  = usLeft ? 'LEFT' : 'RIGHT';
-
-  sideEl.textContent = `FRONT: ${side}`;
+  const usLeft = lm[25].y > lm[26].y;
+  const hip = usLeft ? lm[23] : lm[24];
+  const knee= usLeft ? lm[25] : lm[26];
+  const ankle=usLeft ? lm[27] : lm[28];
+  sideEl.textContent = `FRONT: ${usLeft ? 'LEFT' : 'RIGHT'}`;
 
   const angle = calcAngle(hip, knee, ankle);
-  const angleRounded = Math.round(angle);
-  kneeAngleEl.textContent = angleRounded;
+  const ar = Math.round(angle);
+  kneeAngleEl.textContent = ar;
 
-  // Depth bar: map angle 180→0 to 0→100%
   const depthPct = Math.round(Math.max(0, Math.min(100, (180 - angle) / 90 * 100)));
   depthBarEl.style.height = depthPct + '%';
+  depthBarEl.style.background = angle <= 90 ? '#c8ff00' : angle <= 110 ? '#ffaa00' : '#666';
 
-  // Color depth bar
-  if (angle <= 90)       depthBarEl.style.background = '#c8ff00';
-  else if (angle <= 110) depthBarEl.style.background = '#ffaa00';
-  else                   depthBarEl.style.background = '#666';
-
-  // Feedback
   if (angle <= 90) {
-    feedbackEl.textContent = 'DEEP!';
-    feedbackEl.style.color = 'var(--good)';
-    statusEl.textContent   = '완벽한 깊이!';
-    statusEl.className     = 'overlay-status good';
+    feedbackEl.textContent = 'DEEP!'; feedbackEl.style.color = 'var(--good)';
+    statusEl.textContent = '완벽한 깊이!'; statusEl.className = 'overlay-status good';
   } else if (angle <= 110) {
-    feedbackEl.textContent = 'GO LOWER';
-    feedbackEl.style.color = 'var(--warn)';
-    statusEl.textContent   = '조금 더 내려요';
-    statusEl.className     = 'overlay-status warn';
+    feedbackEl.textContent = 'GO LOWER'; feedbackEl.style.color = 'var(--warn)';
+    statusEl.textContent = '조금 더 내려요'; statusEl.className = 'overlay-status warn';
   } else if (angle <= 140) {
-    feedbackEl.textContent = 'LUNGE';
-    feedbackEl.style.color = 'var(--text)';
-    statusEl.textContent   = '런지 중...';
-    statusEl.className     = 'overlay-status';
+    feedbackEl.textContent = 'LUNGE'; feedbackEl.style.color = 'var(--text)';
+    statusEl.textContent = '런지 중...'; statusEl.className = 'overlay-status';
   } else {
-    feedbackEl.textContent = '준비';
-    feedbackEl.style.color = 'var(--muted)';
-    statusEl.textContent   = '자세 준비';
-    statusEl.className     = 'overlay-status';
+    feedbackEl.textContent = '준비'; feedbackEl.style.color = 'var(--muted)';
+    statusEl.textContent = '자세 준비'; statusEl.className = 'overlay-status';
   }
 
-  // Rep counting state machine
   if (angle <= 100 && phase === 'up') {
-    phase = 'down';
-    frameMinAngle = angle;
-    phaseEl.textContent = 'DOWN';
-    phaseEl.style.color = 'var(--accent)';
+    phase = 'down'; frameMinAngle = angle;
+    phaseEl.textContent = 'DOWN'; phaseEl.style.color = 'var(--accent)';
   } else if (angle <= 100 && phase === 'down') {
     if (angle < frameMinAngle) frameMinAngle = angle;
   } else if (angle > 130 && phase === 'down') {
-    phase = 'up';
-    repCount++;
-    repCountEl.textContent = repCount;
-    flashValue(repCountEl);
-    if (frameMinAngle < minAngle) {
-      minAngle = frameMinAngle;
-      minAngleEl.textContent = Math.round(minAngle) + '°';
-    }
-    phaseEl.textContent = 'UP';
-    phaseEl.style.color = 'var(--good)';
-    setTimeout(() => {
-      phaseEl.textContent = 'READY';
-      phaseEl.style.color = 'var(--muted)';
-    }, 800);
+    phase = 'up'; repCount++;
+    repCountEl.textContent = repCount; flashValue(repCountEl);
+    if (frameMinAngle < minAngle) { minAngle = frameMinAngle; minAngleEl.textContent = Math.round(minAngle) + '°'; }
+    phaseEl.textContent = 'UP'; phaseEl.style.color = 'var(--good)';
+    setTimeout(() => { phaseEl.textContent = 'READY'; phaseEl.style.color = 'var(--muted)'; }, 800);
   }
 
-  // Highlight front knee joint
   const kx = (1 - knee.x) * canvasEl.width;
   const ky = knee.y * canvasEl.height;
-  ctx.beginPath();
-  ctx.arc(kx, ky, 10, 0, Math.PI * 2);
+  ctx.beginPath(); ctx.arc(kx, ky, 10, 0, Math.PI * 2);
   ctx.strokeStyle = angle <= 90 ? '#c8ff00' : angle <= 110 ? '#ffaa00' : '#ffffff55';
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  // Angle arc label
+  ctx.lineWidth = 2; ctx.stroke();
   ctx.fillStyle = angle <= 90 ? '#c8ff00' : angle <= 110 ? '#ffaa00' : '#aaa';
   ctx.font = '500 14px DM Mono, monospace';
-  ctx.fillText(angleRounded + '°', kx + 14, ky - 6);
+  ctx.fillText(ar + '°', kx + 14, ky - 6);
 });
 
 async function startCamera() {
-  if (cameraStarted) return;
   cameraStarted = true;
-  document.getElementById('startBtn').textContent = '카메라 연결 중...';
-  document.getElementById('startBtn').disabled = true;
-
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
-    videoEl.srcObject = stream;
-    videoEl.play();
-
-    const camera = new Camera(videoEl, {
-      onFrame: async () => { await pose.send({ image: videoEl }); },
-      width: 640, height: 480
-    });
+    videoEl.srcObject = stream; videoEl.play();
+    const camera = new Camera(videoEl, { onFrame: async () => { await pose.send({ image: videoEl }); }, width: 640, height: 480 });
     camera.start();
     loadingEl.style.display = 'none';
-    document.getElementById('startBtn').textContent = '카메라 실행 중';
   } catch (e) {
     loadingEl.innerHTML = '<div style="color:#ff4d4d;font-size:13px;text-align:center;padding:20px">카메라 권한이 필요해요<br><small style="color:#666">브라우저 설정에서 카메라를 허용해주세요</small></div>';
-    document.getElementById('startBtn').textContent = '카메라 시작';
-    document.getElementById('startBtn').disabled = false;
     cameraStarted = false;
   }
 }
