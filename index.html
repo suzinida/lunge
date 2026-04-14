@@ -18,9 +18,9 @@
     --purple-light: #7c3fbf;
     --text: #f0ecff;
     --muted: #7a6a9a;
-    --good: #f5c800;
+    --good: #00e676;
     --warn: #ff9d00;
-    --bad: #ff4d6a;
+    --bad: #ff1744;
   }
 
   body {
@@ -62,7 +62,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 60px 24px 48px;
+    padding: 48px 24px 48px;
     text-align: center;
     gap: 24px;
   }
@@ -86,12 +86,72 @@
 
   .hero-title span { color: var(--accent); }
 
-  .hero-desc {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 2;
-    max-width: 460px;
+  .hero-tagline {
+    font-size: 15px;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    border: 0.5px solid var(--border);
+    background: var(--surface);
+    padding: 10px 24px;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 680px;
   }
+
+  /* 판정 기준 카드 */
+  .criteria-card {
+    width: 100%;
+    max-width: 680px;
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    text-align: left;
+  }
+
+  .criteria-title {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .criteria-rules {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .criteria-rule {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .rule-badge {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    padding: 5px 14px;
+    border-radius: 3px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .rule-badge.rep    { background: var(--good); color: #001a08; }
+  .rule-badge.norep  { background: var(--bad);  color: #fff; }
+
+  .rule-text {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .rule-text strong { color: var(--text); font-weight: 400; }
 
   .feature-grid {
     display: grid;
@@ -151,20 +211,20 @@
   .how-step {
     display: flex;
     gap: 14px;
-    font-size: 12px;
+    font-size: 14px;
     color: var(--muted);
-    line-height: 1.6;
-    margin-bottom: 12px;
+    line-height: 1.8;
+    margin-bottom: 14px;
   }
 
   .how-step:last-child { margin-bottom: 0; }
 
   .how-num {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
+    font-size: 24px;
     color: var(--accent);
-    line-height: 1;
-    min-width: 16px;
+    line-height: 1.2;
+    min-width: 18px;
   }
 
   .btn-start {
@@ -233,14 +293,32 @@
     position: absolute; inset: 0;
     width: 100%; height: 100%;
     object-fit: cover;
-    transform: scaleX(-1);
     opacity: 0;
   }
 
   #canvasEl {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
-    transform: scaleX(-1);
+  }
+
+  .rep-flash {
+    position: absolute; inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.1s;
+    z-index: 5;
+  }
+
+  .rep-flash.show { opacity: 1; }
+
+  .rep-flash-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    letter-spacing: 0.06em;
+    text-shadow: 0 0 30px rgba(0,0,0,0.5);
   }
 
   .overlay-status {
@@ -257,6 +335,7 @@
     color: var(--muted);
     white-space: nowrap;
     transition: all 0.2s;
+    z-index: 4;
   }
 
   .overlay-status.good { color: var(--good); border-color: var(--good); }
@@ -271,6 +350,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 4;
   }
 
   .feedback-text {
@@ -304,10 +384,10 @@
     transition: color 0.3s;
   }
 
-  .stat-value.flash { animation: flash 0.3s ease; }
+  .stat-value.flash { animation: flash 0.4s ease; }
 
   @keyframes flash {
-    0%   { color: #fff; transform: scale(1.12); }
+    0%   { color: var(--good); transform: scale(1.15); }
     100% { color: var(--accent); transform: scale(1); }
   }
 
@@ -333,12 +413,9 @@
   .loading-overlay {
     position: absolute; inset: 0;
     background: var(--surface);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    z-index: 10;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 16px; z-index: 10;
   }
 
   .loading-text { font-size: 12px; color: var(--muted); letter-spacing: 0.1em; }
@@ -360,14 +437,14 @@
     border-radius: 2px;
     padding: 6px 14px;
     font-size: 11px; letter-spacing: 0.1em;
-    color: var(--muted);
+    color: var(--muted); z-index: 4;
   }
 
   .depth-bar-wrap {
     position: absolute; left: 16px; top: 50%;
     transform: translateY(-50%);
     display: flex; flex-direction: column;
-    align-items: center; gap: 6px;
+    align-items: center; gap: 6px; z-index: 4;
   }
 
   .depth-bar-track {
@@ -392,8 +469,9 @@
 
   @media (max-width: 600px) {
     .feature-grid { grid-template-columns: 1fr; }
-    .landing-hero { padding: 40px 20px 40px; }
+    .landing-hero { padding: 32px 16px 40px; }
     .hero-title { font-size: 58px; }
+    .landing-header { padding: 20px; }
   }
 </style>
 </head>
@@ -411,10 +489,28 @@
 
     <div class="hero-title">LUNGE<br><span>REP</span><br>CHECKER</div>
 
-    <p class="hero-desc">
-      카메라 하나로 런지 깊이를 실시간 분석해요.<br>
-      앱 설치 없이 브라우저에서 바로 사용 가능해요.
-    </p>
+    <div class="hero-tagline">무릎이 땅에 닿아야 REP 인정!</div>
+
+    <!-- 판정 기준 카드 (사람 그림 없음) -->
+    <div class="criteria-card">
+      <div class="criteria-title">판정 기준</div>
+      <div class="criteria-rules">
+        <div class="criteria-rule">
+          <div class="rule-badge rep">REP</div>
+          <div class="rule-text">
+            뒷무릎이 <strong>바닥에 닿은</strong> 경우<br>
+            → 런지 완전히 인정
+          </div>
+        </div>
+        <div class="criteria-rule">
+          <div class="rule-badge norep">NO REP</div>
+          <div class="rule-text">
+            뒷무릎이 <strong>바닥에 닿지 않은</strong> 경우<br>
+            → 깊이 부족, 다시 내려가세요
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="feature-grid">
       <div class="feature-card">
@@ -470,6 +566,10 @@
       <video id="videoEl" playsinline></video>
       <canvas id="canvasEl"></canvas>
 
+      <div class="rep-flash" id="repFlash">
+        <div class="rep-flash-text" id="repFlashText">REP</div>
+      </div>
+
       <div class="loading-overlay" id="loadingOverlay">
         <div class="spinner"></div>
         <div class="loading-text">AI 모델 로딩 중...</div>
@@ -489,7 +589,7 @@
         <div class="feedback-text" id="feedbackText" style="color:var(--muted)">준비</div>
         <div class="angle-display">
           무릎 각도 <span id="kneeAngle">—</span>°<br>
-          뒷무릎 높이 <span id="kneeHeight">—</span>
+          뒷무릎 <span id="kneeHeight">—</span>
         </div>
       </div>
     </div>
@@ -516,25 +616,26 @@
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
 
 <script>
-const videoEl     = document.getElementById('videoEl');
-const canvasEl    = document.getElementById('canvasEl');
-const ctx         = canvasEl.getContext('2d');
-const loadingEl   = document.getElementById('loadingOverlay');
-const statusEl    = document.getElementById('statusLabel');
-const sideEl      = document.getElementById('sideLabel');
-const feedbackEl  = document.getElementById('feedbackText');
-const kneeAngleEl = document.getElementById('kneeAngle');
-const kneeHeightEl= document.getElementById('kneeHeight');
-const repCountEl  = document.getElementById('repCount');
-const phaseEl     = document.getElementById('phaseLabel');
-const depthBarEl  = document.getElementById('depthBar');
+const videoEl      = document.getElementById('videoEl');
+const canvasEl     = document.getElementById('canvasEl');
+const ctx          = canvasEl.getContext('2d');
+const loadingEl    = document.getElementById('loadingOverlay');
+const statusEl     = document.getElementById('statusLabel');
+const sideEl       = document.getElementById('sideLabel');
+const feedbackEl   = document.getElementById('feedbackText');
+const kneeAngleEl  = document.getElementById('kneeAngle');
+const kneeHeightEl = document.getElementById('kneeHeight');
+const repCountEl   = document.getElementById('repCount');
+const phaseEl      = document.getElementById('phaseLabel');
+const depthBarEl   = document.getElementById('depthBar');
+const repFlashEl   = document.getElementById('repFlash');
+const repFlashText = document.getElementById('repFlashText');
 
 let repCount = 0, phase = 'up';
 let cameraStarted = false;
-
-// 스무딩용 히스토리
 let kneeHeightHistory = [];
 const SMOOTH_FRAMES = 5;
+let flashTimeout = null;
 
 function goToCamera() {
   document.getElementById('landingPage').classList.remove('active');
@@ -566,6 +667,21 @@ function flashValue(el) {
   el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
 }
 
+function showFlash(type) {
+  if (flashTimeout) clearTimeout(flashTimeout);
+  if (type === 'rep') {
+    repFlashEl.style.background = 'rgba(0,230,118,0.25)';
+    repFlashText.textContent = 'REP';
+    repFlashText.style.color = '#00e676';
+  } else {
+    repFlashEl.style.background = 'rgba(255,23,68,0.25)';
+    repFlashText.textContent = 'NO REP';
+    repFlashText.style.color = '#ff1744';
+  }
+  repFlashEl.classList.add('show');
+  flashTimeout = setTimeout(() => repFlashEl.classList.remove('show'), 800);
+}
+
 function resetStats() {
   repCount = 0; phase = 'up';
   repCountEl.textContent = '0';
@@ -574,31 +690,22 @@ function resetStats() {
   kneeHeightHistory = [];
 }
 
-// ── 런지 자세 판별 ──
-// 조건: 앞다리 무릎각도 70~140°, 두 발이 앞뒤로 충분히 벌어져 있어야 함
 function isLungePose(lm) {
-  const leftHip   = lm[23], rightHip  = lm[24];
-  const leftKnee  = lm[25], rightKnee = lm[26];
-  const leftAnkle = lm[27], rightAnkle= lm[28];
-
-  // 두 발목의 x 거리 (앞뒤 벌림) — 0.15 이상이어야 런지로 간주
+  const leftAnkle = lm[27], rightAnkle = lm[28];
   const ankleDist = Math.abs(leftAnkle.x - rightAnkle.x);
   if (ankleDist < 0.15) return null;
 
-  // 앞발 = x가 더 중앙(카메라 쪽)에 있는 발
-  const usLeft = leftKnee.y > rightKnee.y;
-  const frontHip   = usLeft ? leftHip   : rightHip;
-  const frontKnee  = usLeft ? leftKnee  : rightKnee;
-  const frontAnkle = usLeft ? leftAnkle : rightAnkle;
-  const backKnee   = usLeft ? rightKnee : leftKnee;
-  const backAnkle  = usLeft ? rightAnkle: leftAnkle;
-  const backHip    = usLeft ? rightHip  : leftHip;
+  const usLeft = lm[25].y > lm[26].y;
+  const frontHip   = usLeft ? lm[23] : lm[24];
+  const frontKnee  = usLeft ? lm[25] : lm[26];
+  const frontAnkle = usLeft ? lm[27] : lm[28];
+  const backKnee   = usLeft ? lm[26] : lm[25];
+  const backAnkle  = usLeft ? lm[28] : lm[27];
 
-  // 앞무릎 각도가 70~150° 범위여야 런지
   const frontAngle = calcAngle(frontHip, frontKnee, frontAnkle);
   if (frontAngle < 60 || frontAngle > 160) return null;
 
-  return { frontKnee, frontAngle, backKnee, backAnkle, backHip, usLeft };
+  return { frontKnee, frontAngle, backKnee, backAnkle, usLeft };
 }
 
 const pose = new Pose({ locateFile: (f) => `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${f}` });
@@ -614,9 +721,7 @@ pose.onResults((results) => {
   canvasEl.width  = videoEl.videoWidth  || 640;
   canvasEl.height = videoEl.videoHeight || 480;
   ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
-  ctx.save(); ctx.scale(-1,1); ctx.translate(-canvasEl.width,0);
   ctx.drawImage(results.image, 0, 0, canvasEl.width, canvasEl.height);
-  ctx.restore();
 
   if (!results.poseLandmarks) {
     statusEl.textContent = '사람을 찾는 중...';
@@ -635,7 +740,6 @@ pose.onResults((results) => {
   const lungeInfo = isLungePose(lm);
 
   if (!lungeInfo) {
-    // 런지 자세 아님 → 피드백만 표시, 카운트 안 함
     statusEl.textContent = '런지 자세를 취해주세요';
     statusEl.className = 'overlay-status';
     feedbackEl.textContent = '준비';
@@ -645,10 +749,7 @@ pose.onResults((results) => {
     depthBarEl.style.background = 'var(--border)';
     kneeAngleEl.textContent = '—';
     kneeHeightEl.textContent = '—';
-    if (phase === 'down') {
-      // 자세 벗어나면 리셋
-      phase = 'up';
-    }
+    if (phase === 'down' || phase === 'touched') phase = 'up';
     return;
   }
 
@@ -656,88 +757,87 @@ pose.onResults((results) => {
   sideEl.textContent = `FRONT: ${usLeft ? 'LEFT' : 'RIGHT'}`;
   kneeAngleEl.textContent = Math.round(frontAngle);
 
-  // 뒷무릎의 화면상 y 위치 (0=상단, 1=하단)
-  // 바닥에 닿으면 뒷발목과 뒷무릎의 y가 거의 같아짐
-  const backKneeY  = backKnee.y;
-  const backAnkleY = backAnkle.y;
-
-  // smoothed 뒷무릎 y
-  const smoothedKneeY = smoothValue(kneeHeightHistory, backKneeY, SMOOTH_FRAMES);
-
-  // 뒷무릎이 뒷발목에 얼마나 가까운지 (0=멀다, 1=바닥에 닿음)
-  // 발목과 무릎의 y 차이가 0.05 이하면 바닥에 닿은 것으로 간주
-  const kneeAnkleDiff = Math.abs(backKneeY - backAnkleY);
+  const kneeAnkleDiff = Math.abs(backKnee.y - backAnkle.y);
   const touchingFloor = kneeAnkleDiff < 0.07;
 
-  // depth bar: 뒷무릎이 발목에 가까울수록 100%
+  smoothValue(kneeHeightHistory, backKnee.y, SMOOTH_FRAMES);
+
   const depthPct = Math.round(Math.max(0, Math.min(100, (1 - kneeAnkleDiff / 0.25) * 100)));
   depthBarEl.style.height = depthPct + '%';
 
   if (touchingFloor) {
-    depthBarEl.style.background = '#f5c800';
+    depthBarEl.style.background = '#00e676';
     kneeHeightEl.textContent = '바닥 닿음!';
-  } else if (depthPct > 50) {
-    depthBarEl.style.background = '#ff9d00';
-    kneeHeightEl.textContent = '조금 더↓';
-  } else {
-    depthBarEl.style.background = 'var(--border)';
-    kneeHeightEl.textContent = '내려가는 중';
-  }
-
-  // 피드백
-  if (touchingFloor) {
     feedbackEl.textContent = 'TOUCH!';
     feedbackEl.style.color = 'var(--good)';
     statusEl.textContent = '무릎이 바닥에 닿았어요!';
     statusEl.className = 'overlay-status good';
-  } else if (frontAngle <= 110) {
+  } else if (depthPct > 50) {
+    depthBarEl.style.background = '#ff9d00';
+    kneeHeightEl.textContent = '조금 더↓';
     feedbackEl.textContent = 'GO LOWER';
     feedbackEl.style.color = 'var(--warn)';
     statusEl.textContent = '뒷무릎을 더 내려요';
     statusEl.className = 'overlay-status warn';
   } else {
+    depthBarEl.style.background = 'var(--border)';
+    kneeHeightEl.textContent = '내려가는 중';
     feedbackEl.textContent = 'LUNGE';
     feedbackEl.style.color = 'var(--text)';
     statusEl.textContent = '런지 자세 인식됨';
     statusEl.className = 'overlay-status';
   }
 
-  // Rep 카운팅: 뒷무릎이 바닥에 닿으면 down, 다시 올라오면 카운트
-  if (touchingFloor && phase === 'up') {
+  // State machine: up → down → touched → up(REP)
+  if (phase === 'up' && touchingFloor) {
+    phase = 'touched';
+    phaseEl.textContent = 'TOUCH';
+    phaseEl.style.color = 'var(--good)';
+  } else if (phase === 'up' && !touchingFloor && frontAngle < 140) {
     phase = 'down';
     phaseEl.textContent = 'DOWN';
     phaseEl.style.color = 'var(--accent)';
-  } else if (!touchingFloor && frontAngle > 140 && phase === 'down') {
+  } else if (phase === 'down' && touchingFloor) {
+    phase = 'touched';
+    phaseEl.textContent = 'TOUCH';
+    phaseEl.style.color = 'var(--good)';
+  } else if (phase === 'down' && !touchingFloor && frontAngle > 150) {
+    // 바닥 못 닿고 올라옴 → NO REP
+    phase = 'up';
+    showFlash('norep');
+    phaseEl.textContent = 'NO REP';
+    phaseEl.style.color = 'var(--bad)';
+    setTimeout(() => { phaseEl.textContent = 'READY'; phaseEl.style.color = 'var(--muted)'; }, 1000);
+  } else if (phase === 'touched' && !touchingFloor && frontAngle > 140) {
+    // 바닥 닿고 일어섬 → REP!
     phase = 'up';
     repCount++;
     repCountEl.textContent = repCount;
     flashValue(repCountEl);
-    phaseEl.textContent = 'UP';
+    showFlash('rep');
+    phaseEl.textContent = 'REP!';
     phaseEl.style.color = 'var(--good)';
-    setTimeout(() => {
-      phaseEl.textContent = 'READY';
-      phaseEl.style.color = 'var(--muted)';
-    }, 800);
+    setTimeout(() => { phaseEl.textContent = 'READY'; phaseEl.style.color = 'var(--muted)'; }, 1000);
   }
 
-  // 앞무릎에 원 + 각도 표시
-  const kx = (1 - frontKnee.x) * canvasEl.width;
+  // 앞무릎 표시
+  const kx = frontKnee.x * canvasEl.width;
   const ky = frontKnee.y * canvasEl.height;
   ctx.beginPath(); ctx.arc(kx, ky, 10, 0, Math.PI * 2);
-  ctx.strokeStyle = touchingFloor ? '#f5c800' : frontAngle <= 110 ? '#ff9d00' : '#ffffff55';
+  ctx.strokeStyle = touchingFloor ? '#00e676' : frontAngle <= 110 ? '#ff9d00' : '#ffffff55';
   ctx.lineWidth = 2; ctx.stroke();
-  ctx.fillStyle = touchingFloor ? '#f5c800' : '#aaa';
+  ctx.fillStyle = touchingFloor ? '#00e676' : '#aaa';
   ctx.font = '500 13px DM Mono, monospace';
   ctx.fillText(Math.round(frontAngle) + '°', kx + 14, ky - 6);
 
-  // 뒷무릎에도 표시
-  const bkx = (1 - backKnee.x) * canvasEl.width;
+  // 뒷무릎 표시
+  const bkx = backKnee.x * canvasEl.width;
   const bky = backKnee.y * canvasEl.height;
   ctx.beginPath(); ctx.arc(bkx, bky, 8, 0, Math.PI * 2);
-  ctx.strokeStyle = touchingFloor ? '#f5c800' : '#7c3fbf';
+  ctx.strokeStyle = touchingFloor ? '#00e676' : '#7c3fbf';
   ctx.lineWidth = 2; ctx.stroke();
   if (touchingFloor) {
-    ctx.fillStyle = '#f5c800';
+    ctx.fillStyle = '#00e676';
     ctx.font = '500 12px DM Mono, monospace';
     ctx.fillText('TOUCH', bkx + 12, bky - 4);
   }
@@ -746,8 +846,11 @@ pose.onResults((results) => {
 async function startCamera() {
   cameraStarted = true;
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
-    videoEl.srcObject = stream; videoEl.play();
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: { exact: 'environment' } }
+    }).catch(() => navigator.mediaDevices.getUserMedia({ video: true }));
+    videoEl.srcObject = stream;
+    videoEl.play();
     const camera = new Camera(videoEl, {
       onFrame: async () => { await pose.send({ image: videoEl }); },
       width: 640, height: 480
@@ -755,7 +858,7 @@ async function startCamera() {
     camera.start();
     loadingEl.style.display = 'none';
   } catch (e) {
-    loadingEl.innerHTML = '<div style="color:#ff4d6a;font-size:13px;text-align:center;padding:20px">카메라 권한이 필요해요<br><small style="color:#7a6a9a">브라우저 설정에서 카메라를 허용해주세요</small></div>';
+    loadingEl.innerHTML = '<div style="color:#ff1744;font-size:13px;text-align:center;padding:20px">카메라 권한이 필요해요<br><small style="color:#7a6a9a">브라우저 설정에서 카메라를 허용해주세요</small></div>';
     cameraStarted = false;
   }
 }
