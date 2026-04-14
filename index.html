@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lunge Rep Checker</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Bebas+Neue&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -26,7 +26,7 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'DM Mono', monospace;
+    font-family: 'Do Hyeon', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
   }
@@ -34,7 +34,6 @@
   .page { display: none; min-height: 100vh; flex-direction: column; }
   .page.active { display: flex; }
 
-  /* ── LANDING ── */
   .landing-header {
     padding: 24px 40px;
     display: flex;
@@ -44,17 +43,16 @@
   }
 
   .logo {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 28px;
     letter-spacing: 0.06em;
     color: var(--accent);
   }
 
   .subtitle {
-    font-size: 11px;
+    font-size: 14px;
     color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    letter-spacing: 0.06em;
   }
 
   .landing-hero {
@@ -68,9 +66,8 @@
   }
 
   .hero-tag {
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.12em;
     color: var(--accent);
     border: 0.5px solid var(--accent);
     padding: 4px 14px;
@@ -78,19 +75,19 @@
   }
 
   .hero-title {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: clamp(52px, 11vw, 104px);
-    line-height: 0.92;
+    line-height: 0.98;
     letter-spacing: 0.03em;
   }
 
   .hero-title span { color: var(--accent); }
 
   .hero-tagline {
-    font-size: 15px;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 18px;
     color: var(--accent);
-    font-weight: 500;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
     border: 0.5px solid var(--border);
     background: var(--surface);
     padding: 10px 24px;
@@ -99,7 +96,6 @@
     max-width: 680px;
   }
 
-  /* 판정 기준 카드 */
   .criteria-card {
     width: 100%;
     max-width: 680px;
@@ -111,32 +107,24 @@
   }
 
   .criteria-title {
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 36px;
+    letter-spacing: 0.04em;
     color: var(--accent);
     margin-bottom: 20px;
     text-align: center;
   }
 
-  .criteria-rules {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
+  .criteria-rules { display: flex; flex-direction: column; gap: 16px; }
 
-  .criteria-rule {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-  }
+  .criteria-rule { display: flex; align-items: flex-start; gap: 16px; }
 
   .rule-badge {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 16px;
     padding: 5px 14px;
     border-radius: 3px;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
     white-space: nowrap;
     flex-shrink: 0;
     margin-top: 2px;
@@ -146,7 +134,8 @@
   .rule-badge.norep  { background: var(--bad);  color: #fff; }
 
   .rule-text {
-    font-size: 14px;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 15px;
     color: var(--muted);
     line-height: 1.8;
   }
@@ -170,7 +159,7 @@
   }
 
   .feature-num {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 36px;
     color: var(--accent);
     line-height: 1;
@@ -178,14 +167,15 @@
   }
 
   .feature-title {
-    font-size: 12px;
-    font-weight: 500;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 14px;
     color: var(--text);
     margin-bottom: 6px;
   }
 
   .feature-desc {
-    font-size: 11px;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 13px;
     color: var(--muted);
     line-height: 1.7;
   }
@@ -201,17 +191,18 @@
   }
 
   .how-title {
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 16px;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 36px;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    margin-bottom: 20px;
   }
 
   .how-step {
     display: flex;
     gap: 14px;
-    font-size: 14px;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 15px;
     color: var(--muted);
     line-height: 1.8;
     margin-bottom: 14px;
@@ -220,7 +211,7 @@
   .how-step:last-child { margin-bottom: 0; }
 
   .how-num {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 24px;
     color: var(--accent);
     line-height: 1.2;
@@ -235,9 +226,9 @@
     border: none;
     border-radius: 4px;
     color: #1a0a00;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 24px;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.06em;
     cursor: pointer;
     transition: background 0.15s, transform 0.1s;
   }
@@ -245,7 +236,6 @@
   .btn-start:hover { background: #ffd84d; transform: scale(1.01); }
   .btn-start:active { transform: scale(0.99); }
 
-  /* ── CAMERA PAGE ── */
   .cam-header {
     padding: 16px 24px;
     display: flex;
@@ -259,9 +249,8 @@
     border: 0.5px solid var(--border);
     border-radius: 4px;
     color: var(--muted);
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 14px;
     padding: 6px 14px;
     cursor: pointer;
     transition: all 0.15s;
@@ -315,9 +304,9 @@
   .rep-flash.show { opacity: 1; }
 
   .rep-flash-text {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: 80px;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
     text-shadow: 0 0 30px rgba(0,0,0,0.5);
   }
 
@@ -330,8 +319,8 @@
     border: 0.5px solid var(--border);
     border-radius: 2px;
     padding: 8px 20px;
-    font-size: 13px;
-    letter-spacing: 0.08em;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 15px;
     color: var(--muted);
     white-space: nowrap;
     transition: all 0.2s;
@@ -354,13 +343,19 @@
   }
 
   .feedback-text {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 40px;
     letter-spacing: 0.04em;
     transition: color 0.2s;
   }
 
-  .angle-display { font-size: 12px; color: var(--muted); text-align: right; line-height: 1.6; }
+  .angle-display {
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 14px;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.7;
+  }
   .angle-display span { color: var(--text); }
 
   .stats-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -369,17 +364,23 @@
     background: var(--surface);
     border: 0.5px solid var(--border);
     border-radius: 4px;
-    padding: 16px 20px;
+    padding: 20px 24px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
   }
 
-  .stat-label { font-size: 10px; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
+  .stat-label {
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 22px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
 
   .stat-value {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 48px; line-height: 1;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 72px;
+    line-height: 1;
     color: var(--accent);
     transition: color 0.3s;
   }
@@ -391,19 +392,24 @@
     100% { color: var(--accent); transform: scale(1); }
   }
 
-  .stat-sub { font-size: 10px; color: var(--muted); }
+  #phaseLabel { font-size: 36px !important; }
+
+  .stat-sub {
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+  }
 
   .btn {
     width: 100%;
-    padding: 14px 20px;
+    padding: 18px 20px;
     background: transparent;
     border: 0.5px solid var(--border);
     border-radius: 4px;
     color: var(--muted);
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.06em;
     cursor: pointer;
     transition: all 0.15s;
   }
@@ -418,7 +424,11 @@
     gap: 16px; z-index: 10;
   }
 
-  .loading-text { font-size: 12px; color: var(--muted); letter-spacing: 0.1em; }
+  .loading-text {
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 15px;
+    color: var(--muted);
+  }
 
   .spinner {
     width: 32px; height: 32px;
@@ -436,8 +446,10 @@
     border: 0.5px solid var(--border);
     border-radius: 2px;
     padding: 6px 14px;
-    font-size: 11px; letter-spacing: 0.1em;
-    color: var(--muted); z-index: 4;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    z-index: 4;
   }
 
   .depth-bar-wrap {
@@ -461,8 +473,8 @@
   }
 
   .depth-bar-label {
-    font-size: 9px; color: var(--muted);
-    letter-spacing: 0.08em;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 10px; color: var(--muted);
     writing-mode: vertical-lr;
     transform: rotate(180deg);
   }
@@ -472,6 +484,7 @@
     .landing-hero { padding: 32px 16px 40px; }
     .hero-title { font-size: 58px; }
     .landing-header { padding: 20px; }
+    .stat-value { font-size: 56px; }
   }
 </style>
 </head>
@@ -486,28 +499,19 @@
 
   <div class="landing-hero">
     <div class="hero-tag">AI 자세 분석</div>
-
     <div class="hero-title">LUNGE<br><span>REP</span><br>CHECKER</div>
-
     <div class="hero-tagline">무릎이 땅에 닿아야 REP 인정!</div>
 
-    <!-- 판정 기준 카드 (사람 그림 없음) -->
     <div class="criteria-card">
       <div class="criteria-title">판정 기준</div>
       <div class="criteria-rules">
         <div class="criteria-rule">
           <div class="rule-badge rep">REP</div>
-          <div class="rule-text">
-            뒷무릎이 <strong>바닥에 닿은</strong> 경우<br>
-            → 런지 완전히 인정
-          </div>
+          <div class="rule-text">뒷무릎이 <strong>바닥에 닿은</strong> 경우<br>→ 런지 완전히 인정</div>
         </div>
         <div class="criteria-rule">
           <div class="rule-badge norep">NO REP</div>
-          <div class="rule-text">
-            뒷무릎이 <strong>바닥에 닿지 않은</strong> 경우<br>
-            → 깊이 부족, 다시 내려가세요
-          </div>
+          <div class="rule-text">뒷무릎이 <strong>바닥에 닿지 않은</strong> 경우<br>→ 깊이 부족, 다시 내려가세요</div>
         </div>
       </div>
     </div>
@@ -596,13 +600,13 @@
 
     <div class="stats-row">
       <div class="stat-card">
-        <div class="stat-label">Total Reps</div>
+        <div class="stat-label">총 횟수</div>
         <div class="stat-value" id="repCount">0</div>
         <div class="stat-sub">완료된 런지</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Status</div>
-        <div class="stat-value" id="phaseLabel" style="font-size:24px;padding-top:10px;color:var(--muted)">IDLE</div>
+        <div class="stat-label">현재 상태</div>
+        <div class="stat-value" id="phaseLabel" style="color:var(--muted)">대기</div>
         <div class="stat-sub">현재 동작 단계</div>
       </div>
     </div>
@@ -685,7 +689,7 @@ function showFlash(type) {
 function resetStats() {
   repCount = 0; phase = 'up';
   repCountEl.textContent = '0';
-  phaseEl.textContent = 'IDLE';
+  phaseEl.textContent = '대기';
   phaseEl.style.color = 'var(--muted)';
   kneeHeightHistory = [];
 }
@@ -726,7 +730,7 @@ pose.onResults((results) => {
   if (!results.poseLandmarks) {
     statusEl.textContent = '사람을 찾는 중...';
     statusEl.className = 'overlay-status';
-    feedbackEl.textContent = '카메라 앞에 서주세요';
+    feedbackEl.textContent = '준비';
     feedbackEl.style.color = 'var(--muted)';
     depthBarEl.style.height = '0%';
     kneeHeightHistory = [];
@@ -754,12 +758,11 @@ pose.onResults((results) => {
   }
 
   const { frontKnee, frontAngle, backKnee, backAnkle, usLeft } = lungeInfo;
-  sideEl.textContent = `FRONT: ${usLeft ? 'LEFT' : 'RIGHT'}`;
+  sideEl.textContent = `앞발: ${usLeft ? '왼발' : '오른발'}`;
   kneeAngleEl.textContent = Math.round(frontAngle);
 
   const kneeAnkleDiff = Math.abs(backKnee.y - backAnkle.y);
   const touchingFloor = kneeAnkleDiff < 0.07;
-
   smoothValue(kneeHeightHistory, backKnee.y, SMOOTH_FRAMES);
 
   const depthPct = Math.round(Math.max(0, Math.min(100, (1 - kneeAnkleDiff / 0.25) * 100)));
@@ -788,7 +791,6 @@ pose.onResults((results) => {
     statusEl.className = 'overlay-status';
   }
 
-  // State machine: up → down → touched → up(REP)
   if (phase === 'up' && touchingFloor) {
     phase = 'touched';
     phaseEl.textContent = 'TOUCH';
@@ -802,14 +804,12 @@ pose.onResults((results) => {
     phaseEl.textContent = 'TOUCH';
     phaseEl.style.color = 'var(--good)';
   } else if (phase === 'down' && !touchingFloor && frontAngle > 150) {
-    // 바닥 못 닿고 올라옴 → NO REP
     phase = 'up';
     showFlash('norep');
     phaseEl.textContent = 'NO REP';
     phaseEl.style.color = 'var(--bad)';
-    setTimeout(() => { phaseEl.textContent = 'READY'; phaseEl.style.color = 'var(--muted)'; }, 1000);
+    setTimeout(() => { phaseEl.textContent = '준비'; phaseEl.style.color = 'var(--muted)'; }, 1000);
   } else if (phase === 'touched' && !touchingFloor && frontAngle > 140) {
-    // 바닥 닿고 일어섬 → REP!
     phase = 'up';
     repCount++;
     repCountEl.textContent = repCount;
@@ -817,20 +817,18 @@ pose.onResults((results) => {
     showFlash('rep');
     phaseEl.textContent = 'REP!';
     phaseEl.style.color = 'var(--good)';
-    setTimeout(() => { phaseEl.textContent = 'READY'; phaseEl.style.color = 'var(--muted)'; }, 1000);
+    setTimeout(() => { phaseEl.textContent = '준비'; phaseEl.style.color = 'var(--muted)'; }, 1000);
   }
 
-  // 앞무릎 표시
   const kx = frontKnee.x * canvasEl.width;
   const ky = frontKnee.y * canvasEl.height;
   ctx.beginPath(); ctx.arc(kx, ky, 10, 0, Math.PI * 2);
   ctx.strokeStyle = touchingFloor ? '#00e676' : frontAngle <= 110 ? '#ff9d00' : '#ffffff55';
   ctx.lineWidth = 2; ctx.stroke();
   ctx.fillStyle = touchingFloor ? '#00e676' : '#aaa';
-  ctx.font = '500 13px DM Mono, monospace';
+  ctx.font = '15px Do Hyeon, sans-serif';
   ctx.fillText(Math.round(frontAngle) + '°', kx + 14, ky - 6);
 
-  // 뒷무릎 표시
   const bkx = backKnee.x * canvasEl.width;
   const bky = backKnee.y * canvasEl.height;
   ctx.beginPath(); ctx.arc(bkx, bky, 8, 0, Math.PI * 2);
@@ -838,7 +836,7 @@ pose.onResults((results) => {
   ctx.lineWidth = 2; ctx.stroke();
   if (touchingFloor) {
     ctx.fillStyle = '#00e676';
-    ctx.font = '500 12px DM Mono, monospace';
+    ctx.font = '14px Do Hyeon, sans-serif';
     ctx.fillText('TOUCH', bkx + 12, bky - 4);
   }
 });
@@ -858,7 +856,7 @@ async function startCamera() {
     camera.start();
     loadingEl.style.display = 'none';
   } catch (e) {
-    loadingEl.innerHTML = '<div style="color:#ff1744;font-size:13px;text-align:center;padding:20px">카메라 권한이 필요해요<br><small style="color:#7a6a9a">브라우저 설정에서 카메라를 허용해주세요</small></div>';
+    loadingEl.innerHTML = '<div style="color:#ff1744;font-size:15px;text-align:center;padding:20px;font-family:Do Hyeon,sans-serif">카메라 권한이 필요해요<br><small style="color:#7a6a9a;font-size:13px">브라우저 설정에서 카메라를 허용해주세요</small></div>';
     cameraStarted = false;
   }
 }
