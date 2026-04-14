@@ -10,14 +10,17 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #0a0a0a;
-    --surface: #141414;
-    --border: #2a2a2a;
-    --accent: #c8ff00;
-    --text: #f0f0f0;
-    --muted: #666;
-    --good: #c8ff00;
-    --warn: #ffaa00;
+    --bg: #0e0a1a;
+    --surface: #18112e;
+    --border: #2e1f5e;
+    --accent: #f5c800;
+    --purple: #5b2d8e;
+    --purple-light: #7c3fbf;
+    --text: #f0ecff;
+    --muted: #7a6a9a;
+    --good: #f5c800;
+    --warn: #ff9d00;
+    --bad: #ff4d6a;
   }
 
   body {
@@ -76,7 +79,7 @@
 
   .hero-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(56px, 12vw, 108px);
+    font-size: clamp(52px, 11vw, 104px);
     line-height: 0.92;
     letter-spacing: 0.03em;
   }
@@ -171,7 +174,7 @@
     background: var(--accent);
     border: none;
     border-radius: 4px;
-    color: #000;
+    color: #1a0a00;
     font-family: 'Bebas Neue', sans-serif;
     font-size: 24px;
     letter-spacing: 0.1em;
@@ -179,7 +182,7 @@
     transition: background 0.15s, transform 0.1s;
   }
 
-  .btn-start:hover { background: #d8ff20; transform: scale(1.01); }
+  .btn-start:hover { background: #ffd84d; transform: scale(1.01); }
   .btn-start:active { transform: scale(0.99); }
 
   /* ── CAMERA PAGE ── */
@@ -244,7 +247,7 @@
     position: absolute;
     top: 16px; left: 50%;
     transform: translateX(-50%);
-    background: rgba(0,0,0,0.75);
+    background: rgba(14,10,26,0.82);
     backdrop-filter: blur(6px);
     border: 0.5px solid var(--border);
     border-radius: 2px;
@@ -258,12 +261,13 @@
 
   .overlay-status.good { color: var(--good); border-color: var(--good); }
   .overlay-status.warn { color: var(--warn); border-color: var(--warn); }
+  .overlay-status.bad  { color: var(--bad);  border-color: var(--bad);  }
 
   .feedback-bar {
     position: absolute;
     bottom: 0; left: 0; right: 0;
     padding: 14px 20px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    background: linear-gradient(transparent, rgba(14,10,26,0.9));
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -279,7 +283,7 @@
   .angle-display { font-size: 12px; color: var(--muted); text-align: right; line-height: 1.6; }
   .angle-display span { color: var(--text); }
 
-  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .stats-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 
   .stat-card {
     background: var(--surface);
@@ -303,14 +307,14 @@
   .stat-value.flash { animation: flash 0.3s ease; }
 
   @keyframes flash {
-    0%   { color: #fff; transform: scale(1.1); }
+    0%   { color: #fff; transform: scale(1.12); }
     100% { color: var(--accent); transform: scale(1); }
   }
 
   .stat-sub { font-size: 10px; color: var(--muted); }
 
   .btn {
-    flex: 1;
+    width: 100%;
     padding: 14px 20px;
     background: transparent;
     border: 0.5px solid var(--border);
@@ -324,7 +328,7 @@
     transition: all 0.15s;
   }
 
-  .btn:hover { border-color: var(--text); color: var(--text); }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
 
   .loading-overlay {
     position: absolute; inset: 0;
@@ -351,7 +355,7 @@
 
   .side-indicator {
     position: absolute; top: 16px; right: 16px;
-    background: rgba(0,0,0,0.75);
+    background: rgba(14,10,26,0.82);
     border: 0.5px solid var(--border);
     border-radius: 2px;
     padding: 6px 14px;
@@ -389,7 +393,7 @@
   @media (max-width: 600px) {
     .feature-grid { grid-template-columns: 1fr; }
     .landing-hero { padding: 40px 20px 40px; }
-    .hero-title { font-size: 60px; }
+    .hero-title { font-size: 58px; }
   }
 </style>
 </head>
@@ -399,13 +403,13 @@
 <div class="page active" id="landingPage">
   <header class="landing-header">
     <div class="logo">Lunge Rep Checker</div>
-    <div class="subtitle">AI · Browser Only · No Install</div>
+    <div class="subtitle">Yuga Middle School</div>
   </header>
 
   <div class="landing-hero">
     <div class="hero-tag">AI 자세 분석</div>
 
-    <div class="hero-title">LUNGE<br><span>DEPTH</span><br>CHECKER</div>
+    <div class="hero-title">LUNGE<br><span>REP</span><br>CHECKER</div>
 
     <p class="hero-desc">
       카메라 하나로 런지 깊이를 실시간 분석해요.<br>
@@ -421,7 +425,7 @@
       <div class="feature-card">
         <div class="feature-num">02</div>
         <div class="feature-title">자동 카운트</div>
-        <div class="feature-desc">무릎이 100° 이하로 내려가면 자동으로 횟수를 세줘요</div>
+        <div class="feature-desc">무릎이 바닥에 닿으면 자동으로 횟수를 세줘요</div>
       </div>
       <div class="feature-card">
         <div class="feature-num">03</div>
@@ -442,11 +446,11 @@
       </div>
       <div class="how-step">
         <div class="how-num">3</div>
-        <div>런지를 내려갈 때 앞무릎이 100° 이하가 되면 자동으로 카운트돼요</div>
+        <div>런지를 내려갈 때 뒷무릎이 바닥에 닿으면 자동으로 카운트돼요</div>
       </div>
       <div class="how-step">
         <div class="how-num">4</div>
-        <div>무릎이 바닥에 닿을수록 각도가 작아져요. 목표는 <span style="color:var(--accent)">90° 이하</span>예요</div>
+        <div>일어서면 다음 런지를 준비해요. <span style="color:var(--accent)">바닥에 닿을수록 정확하게 인식돼요</span></div>
       </div>
     </div>
 
@@ -485,7 +489,7 @@
         <div class="feedback-text" id="feedbackText" style="color:var(--muted)">준비</div>
         <div class="angle-display">
           무릎 각도 <span id="kneeAngle">—</span>°<br>
-          목표 <span style="color:var(--accent)">≤ 100°</span>
+          뒷무릎 높이 <span id="kneeHeight">—</span>
         </div>
       </div>
     </div>
@@ -495,11 +499,6 @@
         <div class="stat-label">Total Reps</div>
         <div class="stat-value" id="repCount">0</div>
         <div class="stat-sub">완료된 런지</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Min Angle</div>
-        <div class="stat-value" id="minAngle" style="font-size:36px;padding-top:6px">—</div>
-        <div class="stat-sub">이번 세트 최저 각도</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Status</div>
@@ -517,21 +516,25 @@
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
 
 <script>
-const videoEl    = document.getElementById('videoEl');
-const canvasEl   = document.getElementById('canvasEl');
-const ctx        = canvasEl.getContext('2d');
-const loadingEl  = document.getElementById('loadingOverlay');
-const statusEl   = document.getElementById('statusLabel');
-const sideEl     = document.getElementById('sideLabel');
-const feedbackEl = document.getElementById('feedbackText');
-const kneeAngleEl= document.getElementById('kneeAngle');
-const repCountEl = document.getElementById('repCount');
-const minAngleEl = document.getElementById('minAngle');
-const phaseEl    = document.getElementById('phaseLabel');
-const depthBarEl = document.getElementById('depthBar');
+const videoEl     = document.getElementById('videoEl');
+const canvasEl    = document.getElementById('canvasEl');
+const ctx         = canvasEl.getContext('2d');
+const loadingEl   = document.getElementById('loadingOverlay');
+const statusEl    = document.getElementById('statusLabel');
+const sideEl      = document.getElementById('sideLabel');
+const feedbackEl  = document.getElementById('feedbackText');
+const kneeAngleEl = document.getElementById('kneeAngle');
+const kneeHeightEl= document.getElementById('kneeHeight');
+const repCountEl  = document.getElementById('repCount');
+const phaseEl     = document.getElementById('phaseLabel');
+const depthBarEl  = document.getElementById('depthBar');
 
-let repCount = 0, minAngle = Infinity, phase = 'up';
-let cameraStarted = false, frameMinAngle = Infinity;
+let repCount = 0, phase = 'up';
+let cameraStarted = false;
+
+// 스무딩용 히스토리
+let kneeHeightHistory = [];
+const SMOOTH_FRAMES = 5;
 
 function goToCamera() {
   document.getElementById('landingPage').classList.remove('active');
@@ -553,20 +556,59 @@ function calcAngle(a, b, c) {
   return Math.acos(Math.max(-1, Math.min(1, dot / mag))) * (180 / Math.PI);
 }
 
+function smoothValue(history, newVal, maxLen) {
+  history.push(newVal);
+  if (history.length > maxLen) history.shift();
+  return history.reduce((a, b) => a + b, 0) / history.length;
+}
+
 function flashValue(el) {
   el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
 }
 
 function resetStats() {
-  repCount = 0; minAngle = Infinity; phase = 'up';
+  repCount = 0; phase = 'up';
   repCountEl.textContent = '0';
-  minAngleEl.textContent = '—';
   phaseEl.textContent = 'IDLE';
   phaseEl.style.color = 'var(--muted)';
+  kneeHeightHistory = [];
+}
+
+// ── 런지 자세 판별 ──
+// 조건: 앞다리 무릎각도 70~140°, 두 발이 앞뒤로 충분히 벌어져 있어야 함
+function isLungePose(lm) {
+  const leftHip   = lm[23], rightHip  = lm[24];
+  const leftKnee  = lm[25], rightKnee = lm[26];
+  const leftAnkle = lm[27], rightAnkle= lm[28];
+
+  // 두 발목의 x 거리 (앞뒤 벌림) — 0.15 이상이어야 런지로 간주
+  const ankleDist = Math.abs(leftAnkle.x - rightAnkle.x);
+  if (ankleDist < 0.15) return null;
+
+  // 앞발 = x가 더 중앙(카메라 쪽)에 있는 발
+  const usLeft = leftKnee.y > rightKnee.y;
+  const frontHip   = usLeft ? leftHip   : rightHip;
+  const frontKnee  = usLeft ? leftKnee  : rightKnee;
+  const frontAnkle = usLeft ? leftAnkle : rightAnkle;
+  const backKnee   = usLeft ? rightKnee : leftKnee;
+  const backAnkle  = usLeft ? rightAnkle: leftAnkle;
+  const backHip    = usLeft ? rightHip  : leftHip;
+
+  // 앞무릎 각도가 70~150° 범위여야 런지
+  const frontAngle = calcAngle(frontHip, frontKnee, frontAnkle);
+  if (frontAngle < 60 || frontAngle > 160) return null;
+
+  return { frontKnee, frontAngle, backKnee, backAnkle, backHip, usLeft };
 }
 
 const pose = new Pose({ locateFile: (f) => `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${f}` });
-pose.setOptions({ modelComplexity: 1, smoothLandmarks: true, enableSegmentation: false, minDetectionConfidence: 0.5, minTrackingConfidence: 0.5 });
+pose.setOptions({
+  modelComplexity: 1,
+  smoothLandmarks: true,
+  enableSegmentation: false,
+  minDetectionConfidence: 0.6,
+  minTrackingConfidence: 0.6
+});
 
 pose.onResults((results) => {
   canvasEl.width  = videoEl.videoWidth  || 640;
@@ -579,65 +621,126 @@ pose.onResults((results) => {
   if (!results.poseLandmarks) {
     statusEl.textContent = '사람을 찾는 중...';
     statusEl.className = 'overlay-status';
-    feedbackEl.textContent = '옆으로 서주세요';
+    feedbackEl.textContent = '카메라 앞에 서주세요';
     feedbackEl.style.color = 'var(--muted)';
     depthBarEl.style.height = '0%';
+    kneeHeightHistory = [];
     return;
   }
 
   const lm = results.poseLandmarks;
-  drawConnectors(ctx, lm, POSE_CONNECTIONS, { color: '#333', lineWidth: 1 });
-  drawLandmarks(ctx, lm, { color: '#c8ff00', lineWidth: 1, radius: 3 });
+  drawConnectors(ctx, lm, POSE_CONNECTIONS, { color: '#2e1f5e', lineWidth: 1.5 });
+  drawLandmarks(ctx, lm, { color: '#f5c800', lineWidth: 1, radius: 3 });
 
-  const usLeft = lm[25].y > lm[26].y;
-  const hip = usLeft ? lm[23] : lm[24];
-  const knee= usLeft ? lm[25] : lm[26];
-  const ankle=usLeft ? lm[27] : lm[28];
+  const lungeInfo = isLungePose(lm);
+
+  if (!lungeInfo) {
+    // 런지 자세 아님 → 피드백만 표시, 카운트 안 함
+    statusEl.textContent = '런지 자세를 취해주세요';
+    statusEl.className = 'overlay-status';
+    feedbackEl.textContent = '준비';
+    feedbackEl.style.color = 'var(--muted)';
+    sideEl.textContent = '자세 감지 중';
+    depthBarEl.style.height = '0%';
+    depthBarEl.style.background = 'var(--border)';
+    kneeAngleEl.textContent = '—';
+    kneeHeightEl.textContent = '—';
+    if (phase === 'down') {
+      // 자세 벗어나면 리셋
+      phase = 'up';
+    }
+    return;
+  }
+
+  const { frontKnee, frontAngle, backKnee, backAnkle, usLeft } = lungeInfo;
   sideEl.textContent = `FRONT: ${usLeft ? 'LEFT' : 'RIGHT'}`;
+  kneeAngleEl.textContent = Math.round(frontAngle);
 
-  const angle = calcAngle(hip, knee, ankle);
-  const ar = Math.round(angle);
-  kneeAngleEl.textContent = ar;
+  // 뒷무릎의 화면상 y 위치 (0=상단, 1=하단)
+  // 바닥에 닿으면 뒷발목과 뒷무릎의 y가 거의 같아짐
+  const backKneeY  = backKnee.y;
+  const backAnkleY = backAnkle.y;
 
-  const depthPct = Math.round(Math.max(0, Math.min(100, (180 - angle) / 90 * 100)));
+  // smoothed 뒷무릎 y
+  const smoothedKneeY = smoothValue(kneeHeightHistory, backKneeY, SMOOTH_FRAMES);
+
+  // 뒷무릎이 뒷발목에 얼마나 가까운지 (0=멀다, 1=바닥에 닿음)
+  // 발목과 무릎의 y 차이가 0.05 이하면 바닥에 닿은 것으로 간주
+  const kneeAnkleDiff = Math.abs(backKneeY - backAnkleY);
+  const touchingFloor = kneeAnkleDiff < 0.07;
+
+  // depth bar: 뒷무릎이 발목에 가까울수록 100%
+  const depthPct = Math.round(Math.max(0, Math.min(100, (1 - kneeAnkleDiff / 0.25) * 100)));
   depthBarEl.style.height = depthPct + '%';
-  depthBarEl.style.background = angle <= 90 ? '#c8ff00' : angle <= 110 ? '#ffaa00' : '#666';
 
-  if (angle <= 90) {
-    feedbackEl.textContent = 'DEEP!'; feedbackEl.style.color = 'var(--good)';
-    statusEl.textContent = '완벽한 깊이!'; statusEl.className = 'overlay-status good';
-  } else if (angle <= 110) {
-    feedbackEl.textContent = 'GO LOWER'; feedbackEl.style.color = 'var(--warn)';
-    statusEl.textContent = '조금 더 내려요'; statusEl.className = 'overlay-status warn';
-  } else if (angle <= 140) {
-    feedbackEl.textContent = 'LUNGE'; feedbackEl.style.color = 'var(--text)';
-    statusEl.textContent = '런지 중...'; statusEl.className = 'overlay-status';
+  if (touchingFloor) {
+    depthBarEl.style.background = '#f5c800';
+    kneeHeightEl.textContent = '바닥 닿음!';
+  } else if (depthPct > 50) {
+    depthBarEl.style.background = '#ff9d00';
+    kneeHeightEl.textContent = '조금 더↓';
   } else {
-    feedbackEl.textContent = '준비'; feedbackEl.style.color = 'var(--muted)';
-    statusEl.textContent = '자세 준비'; statusEl.className = 'overlay-status';
+    depthBarEl.style.background = 'var(--border)';
+    kneeHeightEl.textContent = '내려가는 중';
   }
 
-  if (angle <= 100 && phase === 'up') {
-    phase = 'down'; frameMinAngle = angle;
-    phaseEl.textContent = 'DOWN'; phaseEl.style.color = 'var(--accent)';
-  } else if (angle <= 100 && phase === 'down') {
-    if (angle < frameMinAngle) frameMinAngle = angle;
-  } else if (angle > 130 && phase === 'down') {
-    phase = 'up'; repCount++;
-    repCountEl.textContent = repCount; flashValue(repCountEl);
-    if (frameMinAngle < minAngle) { minAngle = frameMinAngle; minAngleEl.textContent = Math.round(minAngle) + '°'; }
-    phaseEl.textContent = 'UP'; phaseEl.style.color = 'var(--good)';
-    setTimeout(() => { phaseEl.textContent = 'READY'; phaseEl.style.color = 'var(--muted)'; }, 800);
+  // 피드백
+  if (touchingFloor) {
+    feedbackEl.textContent = 'TOUCH!';
+    feedbackEl.style.color = 'var(--good)';
+    statusEl.textContent = '무릎이 바닥에 닿았어요!';
+    statusEl.className = 'overlay-status good';
+  } else if (frontAngle <= 110) {
+    feedbackEl.textContent = 'GO LOWER';
+    feedbackEl.style.color = 'var(--warn)';
+    statusEl.textContent = '뒷무릎을 더 내려요';
+    statusEl.className = 'overlay-status warn';
+  } else {
+    feedbackEl.textContent = 'LUNGE';
+    feedbackEl.style.color = 'var(--text)';
+    statusEl.textContent = '런지 자세 인식됨';
+    statusEl.className = 'overlay-status';
   }
 
-  const kx = (1 - knee.x) * canvasEl.width;
-  const ky = knee.y * canvasEl.height;
+  // Rep 카운팅: 뒷무릎이 바닥에 닿으면 down, 다시 올라오면 카운트
+  if (touchingFloor && phase === 'up') {
+    phase = 'down';
+    phaseEl.textContent = 'DOWN';
+    phaseEl.style.color = 'var(--accent)';
+  } else if (!touchingFloor && frontAngle > 140 && phase === 'down') {
+    phase = 'up';
+    repCount++;
+    repCountEl.textContent = repCount;
+    flashValue(repCountEl);
+    phaseEl.textContent = 'UP';
+    phaseEl.style.color = 'var(--good)';
+    setTimeout(() => {
+      phaseEl.textContent = 'READY';
+      phaseEl.style.color = 'var(--muted)';
+    }, 800);
+  }
+
+  // 앞무릎에 원 + 각도 표시
+  const kx = (1 - frontKnee.x) * canvasEl.width;
+  const ky = frontKnee.y * canvasEl.height;
   ctx.beginPath(); ctx.arc(kx, ky, 10, 0, Math.PI * 2);
-  ctx.strokeStyle = angle <= 90 ? '#c8ff00' : angle <= 110 ? '#ffaa00' : '#ffffff55';
+  ctx.strokeStyle = touchingFloor ? '#f5c800' : frontAngle <= 110 ? '#ff9d00' : '#ffffff55';
   ctx.lineWidth = 2; ctx.stroke();
-  ctx.fillStyle = angle <= 90 ? '#c8ff00' : angle <= 110 ? '#ffaa00' : '#aaa';
-  ctx.font = '500 14px DM Mono, monospace';
-  ctx.fillText(ar + '°', kx + 14, ky - 6);
+  ctx.fillStyle = touchingFloor ? '#f5c800' : '#aaa';
+  ctx.font = '500 13px DM Mono, monospace';
+  ctx.fillText(Math.round(frontAngle) + '°', kx + 14, ky - 6);
+
+  // 뒷무릎에도 표시
+  const bkx = (1 - backKnee.x) * canvasEl.width;
+  const bky = backKnee.y * canvasEl.height;
+  ctx.beginPath(); ctx.arc(bkx, bky, 8, 0, Math.PI * 2);
+  ctx.strokeStyle = touchingFloor ? '#f5c800' : '#7c3fbf';
+  ctx.lineWidth = 2; ctx.stroke();
+  if (touchingFloor) {
+    ctx.fillStyle = '#f5c800';
+    ctx.font = '500 12px DM Mono, monospace';
+    ctx.fillText('TOUCH', bkx + 12, bky - 4);
+  }
 });
 
 async function startCamera() {
@@ -645,11 +748,14 @@ async function startCamera() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
     videoEl.srcObject = stream; videoEl.play();
-    const camera = new Camera(videoEl, { onFrame: async () => { await pose.send({ image: videoEl }); }, width: 640, height: 480 });
+    const camera = new Camera(videoEl, {
+      onFrame: async () => { await pose.send({ image: videoEl }); },
+      width: 640, height: 480
+    });
     camera.start();
     loadingEl.style.display = 'none';
   } catch (e) {
-    loadingEl.innerHTML = '<div style="color:#ff4d4d;font-size:13px;text-align:center;padding:20px">카메라 권한이 필요해요<br><small style="color:#666">브라우저 설정에서 카메라를 허용해주세요</small></div>';
+    loadingEl.innerHTML = '<div style="color:#ff4d6a;font-size:13px;text-align:center;padding:20px">카메라 권한이 필요해요<br><small style="color:#7a6a9a">브라우저 설정에서 카메라를 허용해주세요</small></div>';
     cameraStarted = false;
   }
 }
