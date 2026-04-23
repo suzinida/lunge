@@ -98,7 +98,6 @@
 
   .feature-num { font-size: 36px; color: var(--accent); line-height: 1; margin-bottom: 8px; }
   .feature-title { font-size: 17px; color: var(--text); margin-bottom: 8px; }
-  /* ★ 연보라 설명 글씨 줄임 */
   .feature-desc { font-size: 12px; color: var(--muted); line-height: 1.7; }
 
   .how-section {
@@ -117,7 +116,6 @@
   .how-step:last-child { margin-bottom: 0; }
   .how-num { font-size: 24px; color: var(--accent); line-height: 1.2; min-width: 18px; }
 
-  /* ★ 카메라 시작하기 버튼 — font-family 명시 */
   .btn-start {
     width: 100%; max-width: 680px; padding: 20px;
     background: var(--accent); border: none; border-radius: 4px;
@@ -196,7 +194,6 @@
   .angle-display { font-size: 14px; color: var(--muted); text-align: right; line-height: 1.7; }
   .angle-display span { color: var(--text); }
 
-  /* ★ 항상 3칸 가로 — 모바일도 동일 */
   .stats-row {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -224,7 +221,6 @@
 
   .stat-sub { font-size: 11px; color: var(--muted); }
 
-  /* ★ 횟수 초기화 버튼 — font-family 명시 */
   .btn {
     width: 100%; padding: 18px 20px; background: transparent;
     border: 0.5px solid var(--border); border-radius: 4px;
@@ -280,7 +276,6 @@
 </head>
 <body>
 
-<!-- ══ LANDING PAGE ══ -->
 <div class="page active" id="landingPage">
   <header class="landing-header">
     <div class="logo">Lunge Rep Checker</div>
@@ -354,7 +349,6 @@
   </div>
 </div>
 
-<!-- ══ CAMERA PAGE ══ -->
 <div class="page" id="cameraPage">
   <div class="cam-header">
     <div class="logo" style="font-size:22px">Lunge Rep Checker</div>
@@ -575,7 +569,6 @@ pose.onResults((results) => {
     statusEl.className = 'overlay-status';
   }
 
-  // 왼무릎 state machine
   if (leftPhase === 'up' && lAngle < 140) leftPhase = 'down';
   if (leftPhase === 'down' && lTouch) leftPhase = 'touched';
   if (leftPhase === 'down' && !lTouch && lAngle > 155) { leftPhase = 'up'; showFlash('norep'); }
@@ -587,7 +580,6 @@ pose.onResults((results) => {
     showFlash('rep');
   }
 
-  // 오른무릎 state machine
   if (rightPhase === 'up' && rAngle < 140) rightPhase = 'down';
   if (rightPhase === 'down' && rTouch) rightPhase = 'touched';
   if (rightPhase === 'down' && !rTouch && rAngle > 155) { rightPhase = 'up'; showFlash('norep'); }
@@ -622,8 +614,9 @@ pose.onResults((results) => {
 async function startCamera() {
   cameraStarted = true;
   try {
+    // 1번 왕복달리기와 동일 - 전면 카메라 우선
     const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: { exact: 'environment' } }
+      video: { facingMode: 'user' }
     }).catch(() => navigator.mediaDevices.getUserMedia({ video: true }));
     videoEl.srcObject = stream; videoEl.play();
     const camera = new Camera(videoEl, {
