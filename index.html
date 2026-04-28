@@ -516,6 +516,32 @@ pose.onResults((results) => {
   drawConnectors(ctx, lm, POSE_CONNECTIONS, { color: '#2e1f5e', lineWidth: 1.5 });
   drawLandmarks(ctx, lm, { color: '#f5c800', lineWidth: 1, radius: 3 });
 
+  // ═════ 전신 감지 체크 ═════
+  const keyPoints = [11, 12, 23, 24, 25, 26, 27, 28];
+  const visValues = keyPoints.map(i => lm[i].visibility || 0);
+  const avgVis = visValues.reduce((a, b) => a + b, 0) / visValues.length;
+  const lowVisCount = visValues.filter(v => v < 0.5).length;
+
+  if (lowVisCount >= 4) {
+    statusEl.textContent = '전신이 모두 화면에 나오게 카메라를 옮겨주세요';
+    statusEl.className = 'overlay-status warn';
+    feedbackEl.textContent = 'MOVE';
+    feedbackEl.style.color = 'var(--warn)';
+    sideEl.textContent = '전신 미감지';
+    depthBarEl.style.height = '0%';
+    return;
+  }
+
+  if (avgVis < 0.45 && lowVisCount >= 2) {
+    statusEl.textContent = '카메라 안에 한 사람만 나오게 해주세요';
+    statusEl.className = 'overlay-status warn';
+    feedbackEl.textContent = 'ALONE';
+    feedbackEl.style.color = 'var(--warn)';
+    sideEl.textContent = '인식 불안정';
+    depthBarEl.style.height = '0%';
+    return;
+  }
+
   if (!isLungePose(lm)) {
     statusEl.textContent = '런지 자세를 취해주세요';
     statusEl.className = 'overlay-status';
